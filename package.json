@@ -2,7 +2,7 @@
   "name": "litcentral-v13",
   "version": "13.0.0",
   "description": "LitCentral v13 - Manuscript audit and revision platform with Gate Zero normalization",
-  "main": "src/index.js",
+  "main": "src/index.jsx",
   "type": "module",
   "scripts": {
     "dev": "vite",
