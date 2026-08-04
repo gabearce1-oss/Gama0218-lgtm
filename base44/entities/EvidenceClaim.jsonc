@@ -1,0 +1,109 @@
+{
+  "name": "EvidenceClaim",
+  "type": "object",
+  "properties": {
+    "claim_id": {
+      "type": "string"
+    },
+    "chapter_number": {
+      "type": "number"
+    },
+    "scene_id": {
+      "type": "string"
+    },
+    "claim_text": {
+      "type": "string"
+    },
+    "claim_category": {
+      "type": "string",
+      "enum": [
+        "military",
+        "timeline",
+        "weapon",
+        "aircraft",
+        "vehicle",
+        "geography",
+        "language",
+        "character_canon",
+        "formula",
+        "word_count",
+        "code_switching",
+        "modeled_narrative"
+      ]
+    },
+    "evidence_class": {
+      "type": "string",
+      "enum": [
+        "E0",
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6"
+      ]
+    },
+    "source_title": {
+      "type": "string"
+    },
+    "source_url_or_file": {
+      "type": "string"
+    },
+    "source_note": {
+      "type": "string"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "verified",
+        "high",
+        "medium",
+        "low",
+        "speculative"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "needs_review",
+        "blocked",
+        "authorial_invention"
+      ],
+      "default": "needs_review"
+    },
+    "reviewer": {
+      "type": "string"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "claim_text",
+    "claim_category",
+    "evidence_class"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

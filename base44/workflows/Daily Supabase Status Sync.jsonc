@@ -1,0 +1,41 @@
+{
+  "name": "Daily Supabase Status Sync",
+  "description": "Daily check of Supabase project status and syncs the latest operational state into the Cloud Integrations dashboard",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "0 15 * * *",
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "daily_supabase_status_sync",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_function": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "supabaseProjectStatus",
+            "args": {}
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

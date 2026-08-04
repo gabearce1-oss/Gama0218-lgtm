@@ -1,0 +1,9 @@
+{
+  "type": "dropbox",
+  "scopes": [
+    "files.content.write",
+    "files.content.read",
+    "files.metadata.read",
+    "account_info.read"
+  ]
+}

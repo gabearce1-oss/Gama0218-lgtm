@@ -1,0 +1,97 @@
+{
+  "name": "CodeSwitch",
+  "type": "object",
+  "properties": {
+    "chapter_number": {
+      "type": "number"
+    },
+    "position": {
+      "type": "number"
+    },
+    "speaker": {
+      "type": "string"
+    },
+    "line_text": {
+      "type": "string"
+    },
+    "matrix_code": {
+      "type": "string",
+      "enum": [
+        "ENG",
+        "CHENG",
+        "SPAN",
+        "CHSPAN",
+        "CALO",
+        "MIX",
+        "BORROW",
+        "NAME"
+      ]
+    },
+    "switch_to": {
+      "type": "string",
+      "enum": [
+        "ENG",
+        "CHENG",
+        "SPAN",
+        "CHSPAN",
+        "CALO",
+        "MIX",
+        "BORROW",
+        "NAME"
+      ]
+    },
+    "switch_type": {
+      "type": "string"
+    },
+    "function_tag": {
+      "type": "string",
+      "enum": [
+        "IDENTITY",
+        "SOLIDARITY",
+        "EMPHASIS",
+        "HUMOR",
+        "QUOTE",
+        "CULTURE",
+        "TOPIC_SHIFT",
+        "LEXICAL_NEED",
+        "POWER_RESISTANCE"
+      ]
+    },
+    "count_switch": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "chapter_number",
+    "position"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

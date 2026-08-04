@@ -1,0 +1,119 @@
+{
+  "name": "Blocker",
+  "type": "object",
+  "properties": {
+    "blocker_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "P0",
+        "P1",
+        "P2"
+      ],
+      "default": "P0"
+    },
+    "gate": {
+      "type": "string",
+      "enum": [
+        "governance",
+        "data_hygiene",
+        "chicano_lens",
+        "prose"
+      ],
+      "default": "data_hygiene"
+    },
+    "evidence_status": {
+      "type": "string",
+      "enum": [
+        "verified_conflict",
+        "missing_evidence",
+        "modeled_unclear",
+        "canon_conflict",
+        "prose_issue"
+      ]
+    },
+    "description": {
+      "type": "string"
+    },
+    "omega_penalty": {
+      "type": "number"
+    },
+    "affected_chapters": {
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "affected_words": {
+      "type": "number"
+    },
+    "overlap_pct": {
+      "type": "number"
+    },
+    "words_at_risk": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "resolved",
+        "in_review",
+        "accepted_risk"
+      ],
+      "default": "active"
+    },
+    "resolution": {
+      "type": "string"
+    },
+    "required_fix": {
+      "type": "string"
+    },
+    "source_reference": {
+      "type": "string"
+    },
+    "beat_pacing": {
+      "type": "number"
+    },
+    "flesch_reading_score": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "blocker_id",
+    "title"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "name": "GabeRuling",
+  "type": "object",
+  "properties": {
+    "ruling_id": {
+      "type": "string"
+    },
+    "cook_packet_id": {
+      "type": "string"
+    },
+    "cook_output_id": {
+      "type": "string"
+    },
+    "ruling_type": {
+      "type": "string",
+      "enum": [
+        "ACCEPT",
+        "REJECT",
+        "MODIFY",
+        "REQUEST_REVIEW",
+        "PROMOTE_V25",
+        "QUARANTINE"
+      ]
+    },
+    "decision": {
+      "type": "string"
+    },
+    "promoted_status": {
+      "type": "string",
+      "enum": [
+        "NOT_REVIEWED",
+        "STAGING_ONLY",
+        "PROMOTED_FOR_CALCULATION",
+        "PROMOTED_FOR_CANON",
+        "REJECTED",
+        "QUARANTINED"
+      ],
+      "default": "NOT_REVIEWED"
+    },
+    "ruling_text": {
+      "type": "string"
+    },
+    "decision_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "ruling_id"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

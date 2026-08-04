@@ -1,0 +1,43 @@
+{
+  "description": "Writes a chain-of-custody changelog entry whenever a SyncSettings record is updated.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "entity",
+      "events": [
+        "update"
+      ],
+      "entity_name": "SyncSettings"
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "sync_setting_change_log",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "log_change": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "logSyncSettingChange",
+            "args": {
+              "entity_id": "${ .trigger.entity_id }",
+              "data": "${ .trigger.data }",
+              "old_data": "${ .trigger.old_data }",
+              "changed_fields": "${ .trigger.changed_fields }"
+            }
+          },
+          "then": "end",
+          "x-base44": {
+            "title": "Log sync setting change",
+            "description": "Writes changelog entry"
+          }
+        }
+      }
+    ]
+  },
+  "name": "Sync Setting Change Log"
+}

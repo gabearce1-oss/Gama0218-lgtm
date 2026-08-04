@@ -1,0 +1,62 @@
+{
+  "name": "Changelog",
+  "type": "object",
+  "properties": {
+    "change_id": {
+      "type": "string"
+    },
+    "change_type": {
+      "type": "string",
+      "enum": [
+        "CREATE_COOK_PACKET",
+        "SUBMIT_TO_GEMINI",
+        "IMPORT_GEMINI_OUTPUT",
+        "REQUEST_GABE_RULING",
+        "MARK_NEEDS_REVIEW",
+        "REQUEST_QUARANTINE",
+        "LOG_CHANGE",
+        "PROMOTE_V25",
+        "EXPORT_STAGING_REPORT"
+      ]
+    },
+    "entity_type": {
+      "type": "string"
+    },
+    "entity_id": {
+      "type": "string"
+    },
+    "chapter_number": {
+      "type": "number"
+    },
+    "description": {
+      "type": "string"
+    },
+    "old_value": {
+      "type": "string"
+    },
+    "new_value": {
+      "type": "string"
+    },
+    "gabe_approved": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "change_id"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

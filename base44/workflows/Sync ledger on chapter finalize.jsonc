@@ -1,0 +1,35 @@
+{
+  "name": "Sync ledger on chapter finalize",
+  "description": "Pushes the chapter ledger to the Google Sheets WORKBOOK_LEDGER tab whenever a chapter record changes (including score finalization).",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "entity",
+      "events": [
+        "create",
+        "update"
+      ],
+      "entity_name": "Chapter"
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "sync_ledger_on_chapter_finalize",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_function": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "syncWorkbookLedgerToSheets",
+            "args": {}
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

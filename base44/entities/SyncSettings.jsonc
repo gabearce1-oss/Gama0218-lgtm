@@ -1,0 +1,56 @@
+{
+  "name": "SyncSettings",
+  "type": "object",
+  "properties": {
+    "setting_key": {
+      "type": "string",
+      "enum": [
+        "quarantine_log_sync",
+        "restoration_drafts_sync",
+        "workbook_ledger_sync"
+      ]
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "last_synced": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_sync_status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "error",
+        "disabled",
+        "never"
+      ],
+      "default": "never"
+    },
+    "last_sync_summary": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "setting_key"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": null,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

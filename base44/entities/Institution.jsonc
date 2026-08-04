@@ -1,0 +1,83 @@
+{
+  "name": "Institution",
+  "type": "object",
+  "properties": {
+    "institution_id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string",
+      "enum": [
+        "US",
+        "UK",
+        "Europe",
+        "Other"
+      ]
+    },
+    "country": {
+      "type": "string"
+    },
+    "mission_fit": {
+      "type": "string"
+    },
+    "key_contacts": {
+      "type": "string"
+    },
+    "programs": {
+      "type": "string"
+    },
+    "funding_mechanism": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "default": "P3"
+    },
+    "public_contact": {
+      "type": "string"
+    },
+    "fit_score": {
+      "type": "number"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "institution_id",
+    "name"
+  ],
+  "rls": {
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "read": null,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

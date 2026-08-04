@@ -1,0 +1,51 @@
+{
+  "name": "SyncLog",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string"
+    },
+    "file_name": {
+      "type": "string"
+    },
+    "file_modified": {
+      "type": "string"
+    },
+    "chapters_updated": {
+      "type": "number"
+    },
+    "chapters_skipped": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "error",
+        "no_files"
+      ],
+      "default": "success"
+    },
+    "error_message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "source",
+    "status"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

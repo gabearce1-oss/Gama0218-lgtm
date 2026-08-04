@@ -1,0 +1,85 @@
+{
+  "name": "RestorationDraft",
+  "type": "object",
+  "properties": {
+    "chapter_number": {
+      "type": "number"
+    },
+    "chapter_title": {
+      "type": "string"
+    },
+    "original_omega": {
+      "type": "number"
+    },
+    "cooked_omega": {
+      "type": "number"
+    },
+    "original_cls": {
+      "type": "number"
+    },
+    "cooked_cls": {
+      "type": "number"
+    },
+    "original_bis": {
+      "type": "number"
+    },
+    "cooked_bis": {
+      "type": "number"
+    },
+    "original_sii": {
+      "type": "number"
+    },
+    "cooked_sii": {
+      "type": "number"
+    },
+    "original_mrf": {
+      "type": "number"
+    },
+    "cooked_mrf": {
+      "type": "number"
+    },
+    "approved_passages": {
+      "type": "number"
+    },
+    "llm_reasoning": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "published",
+        "rejected"
+      ],
+      "default": "draft"
+    },
+    "cooked_date": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "chapter_number"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

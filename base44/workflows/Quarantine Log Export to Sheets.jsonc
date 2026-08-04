@@ -1,0 +1,41 @@
+{
+  "name": "Quarantine Log Export to Sheets",
+  "description": "Daily auto-sync of QuarantineLog entity records into the Google Sheet for external filtering and management",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "recurring",
+      "cron_expression": "15 16 * * *",
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": null,
+      "interval_unit": null,
+      "interval_anchor": null,
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "quarantine_log_export_to_sheets",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_function": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "syncQuarantineLogToSheets",
+            "args": {}
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

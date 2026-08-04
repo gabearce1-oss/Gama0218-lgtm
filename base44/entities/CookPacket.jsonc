@@ -1,0 +1,135 @@
+{
+  "name": "CookPacket",
+  "type": "object",
+  "properties": {
+    "cook_packet_id": {
+      "type": "string"
+    },
+    "packet_status": {
+      "type": "string",
+      "enum": [
+        "READY_FOR_GEMINI",
+        "COOKING",
+        "COOKED_PENDING_REVIEW",
+        "NEEDS_GABE_RULING",
+        "NEEDS_REVIEW",
+        "BLOCKED_DRAFT",
+        "BLOCKED_TIMELINE_CONFLICT",
+        "BLOCKED_VCL_EXEMPT",
+        "REJECTED",
+        "ARCHIVED"
+      ],
+      "default": "READY_FOR_GEMINI"
+    },
+    "requested_action": {
+      "type": "string",
+      "enum": [
+        "VOICECHECK",
+        "FORENSIC",
+        "RESTORE_PROPOSAL",
+        "FORMULA_RECONCILE",
+        "EXPORT_PREP",
+        "AUDIT_ONLY",
+        "QUARANTINE_REVIEW"
+      ]
+    },
+    "chapter_number": {
+      "type": "number"
+    },
+    "chapter_title": {
+      "type": "string"
+    },
+    "source_row_id": {
+      "type": "string"
+    },
+    "source_sheet": {
+      "type": "string",
+      "default": "SGT_Ramos_LitCentral_FULL_METRICS"
+    },
+    "source_status": {
+      "type": "string",
+      "enum": [
+        "RAW_LEGACY",
+        "STAGING",
+        "LOCKED_CANON"
+      ],
+      "default": "RAW_LEGACY"
+    },
+    "stored_omega": {
+      "type": "number"
+    },
+    "stored_omega_status": {
+      "type": "string",
+      "enum": [
+        "LEGACY_LOCKED"
+      ],
+      "default": "LEGACY_LOCKED"
+    },
+    "candidate_formula": {
+      "type": "string",
+      "default": "RF_1_5"
+    },
+    "v25_status": {
+      "type": "string",
+      "enum": [
+        "STAGING_NON_CANON",
+        "PROMOTED_FOR_CALCULATION",
+        "PROMOTED_FOR_CANON"
+      ],
+      "default": "STAGING_NON_CANON"
+    },
+    "vcl_exempt": {
+      "type": "boolean",
+      "default": false
+    },
+    "open_bug_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "fix_note": {
+      "type": "string"
+    },
+    "known_risks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "locked_facts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "gabe_approval_required": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "cook_packet_id"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "name": "OutreachAction",
+  "type": "object",
+  "properties": {
+    "action_id": {
+      "type": "string"
+    },
+    "institution_id": {
+      "type": "string"
+    },
+    "institution_name": {
+      "type": "string"
+    },
+    "segment": {
+      "type": "string",
+      "enum": [
+        "academic_archive",
+        "research_center",
+        "oral_history",
+        "veteran_org",
+        "press",
+        "funder",
+        "specialist"
+      ]
+    },
+    "rationale": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "P0",
+        "P1",
+        "P2",
+        "P3"
+      ],
+      "default": "P3"
+    },
+    "wave": {
+      "type": "string",
+      "enum": [
+        "quiet_first",
+        "formal_second",
+        "veteran_third",
+        "public_fourth"
+      ],
+      "default": "quiet_first"
+    },
+    "outreach_owner": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "not_started",
+        "drafted",
+        "sent",
+        "replied",
+        "meeting_scheduled",
+        "meeting_held",
+        "submitted",
+        "declined",
+        "archived"
+      ],
+      "default": "not_started"
+    },
+    "next_action": {
+      "type": "string"
+    },
+    "contact_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reply_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "action_id",
+    "institution_id"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

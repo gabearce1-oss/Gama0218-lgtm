@@ -1,0 +1,207 @@
+{
+  "name": "Chapter",
+  "type": "object",
+  "properties": {
+    "chapter_number": {
+      "type": "number"
+    },
+    "title": {
+      "type": "string"
+    },
+    "act": {
+      "type": "string",
+      "enum": [
+        "I",
+        "II",
+        "III"
+      ]
+    },
+    "omega": {
+      "type": "number"
+    },
+    "omega_audit": {
+      "type": "number"
+    },
+    "cls": {
+      "type": "number"
+    },
+    "bis": {
+      "type": "number"
+    },
+    "sii": {
+      "type": "number"
+    },
+    "mrf": {
+      "type": "number"
+    },
+    "character_agency": {
+      "type": "number"
+    },
+    "emotional_resonance": {
+      "type": "number"
+    },
+    "dialogue": {
+      "type": "number"
+    },
+    "reader_retention": {
+      "type": "number"
+    },
+    "cinematic_potential": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "scored",
+        "pending",
+        "blocker"
+      ],
+      "default": "pending"
+    },
+    "word_count": {
+      "type": "number"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "blocker_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "priority": {
+      "type": "string",
+      "enum": [
+        "immediate",
+        "next",
+        "routine"
+      ],
+      "default": "routine"
+    },
+    "priority_reason": {
+      "type": "string"
+    },
+    "risk": {
+      "type": "string"
+    },
+    "triage": {
+      "type": "string"
+    },
+    "cs_pct": {
+      "type": "number"
+    },
+    "spanish_tokens": {
+      "type": "number"
+    },
+    "sensory_present": {
+      "type": "number"
+    },
+    "sensory_total": {
+      "type": "number"
+    },
+    "omega_est": {
+      "type": "number"
+    },
+    "cls_est": {
+      "type": "number"
+    },
+    "bis_est": {
+      "type": "number"
+    },
+    "sii_est": {
+      "type": "number"
+    },
+    "mrf_est": {
+      "type": "number"
+    },
+    "tier_label": {
+      "type": "string"
+    },
+    "priority_action": {
+      "type": "string"
+    },
+    "restoration_notes": {
+      "type": "string"
+    },
+    "voice": {
+      "type": "number"
+    },
+    "lens": {
+      "type": "number"
+    },
+    "cs_score": {
+      "type": "number"
+    },
+    "familia": {
+      "type": "number"
+    },
+    "barrio": {
+      "type": "number"
+    },
+    "hist": {
+      "type": "number"
+    },
+    "carnalismo": {
+      "type": "number"
+    },
+    "composite": {
+      "type": "number"
+    },
+    "moral_weight": {
+      "type": "number"
+    },
+    "body_memory": {
+      "type": "number"
+    },
+    "grief_index": {
+      "type": "number"
+    },
+    "agency_under_fire": {
+      "type": "number"
+    },
+    "cultural_reflex": {
+      "type": "number"
+    },
+    "beat_pacing": {
+      "type": "number"
+    },
+    "flesch_reading_score": {
+      "type": "number"
+    },
+    "bugs": {
+      "type": "number"
+    },
+    "smells": {
+      "type": "number"
+    },
+    "vulnerabilities": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "chapter_number",
+    "title"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

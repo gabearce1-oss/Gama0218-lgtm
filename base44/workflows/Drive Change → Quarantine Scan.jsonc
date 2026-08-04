@@ -1,0 +1,35 @@
+{
+  "name": "Drive Change \u2192 Quarantine Scan",
+  "description": "Real-time webhook: when files change in Google Drive, detects new/modified manuscript files and scans them for prose improvement opportunities, quarantining any found.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "connector",
+      "events": [
+        "changes"
+      ],
+      "integration_type": "googledrive",
+      "resource_id": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "drive_change_quarantine_scan",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_function": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "onDriveChange",
+            "args": {}
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

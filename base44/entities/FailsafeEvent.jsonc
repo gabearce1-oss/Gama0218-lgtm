@@ -1,0 +1,113 @@
+{
+  "name": "FailsafeEvent",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "tripwire_id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "Security breach",
+        "Access anomaly",
+        "Missed data",
+        "Unverified claim",
+        "Guardrail examination",
+        "Scoring custody violation",
+        "Formula drift",
+        "Sync failure",
+        "Other"
+      ],
+      "default": "Other"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "default": "High"
+    },
+    "detected_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "detected_by": {
+      "type": "string"
+    },
+    "detection_source": {
+      "type": "string"
+    },
+    "affected_systems": {
+      "type": "string"
+    },
+    "evidence": {
+      "type": "string"
+    },
+    "trigger_state": {
+      "type": "string",
+      "enum": [
+        "Armed",
+        "Tripped",
+        "Contained",
+        "Cleared",
+        "Standing risk"
+      ],
+      "default": "Tripped"
+    },
+    "halts_pipeline": {
+      "type": "boolean",
+      "default": true
+    },
+    "containment_action": {
+      "type": "string"
+    },
+    "human_reviewer": {
+      "type": "string"
+    },
+    "signed_off": {
+      "type": "boolean",
+      "default": false
+    },
+    "cleared_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "category"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

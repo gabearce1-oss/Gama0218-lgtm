@@ -1,0 +1,84 @@
+{
+  "name": "ScanHit",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "locator_id": {
+      "type": "string"
+    },
+    "locator_name": {
+      "type": "string"
+    },
+    "locator_class": {
+      "type": "string",
+      "enum": [
+        "structure",
+        "language",
+        "sensory",
+        "timeline",
+        "hardware",
+        "integrity",
+        "artifact"
+      ],
+      "default": "structure"
+    },
+    "source_file": {
+      "type": "string"
+    },
+    "source_file_id": {
+      "type": "string"
+    },
+    "match_text": {
+      "type": "string"
+    },
+    "context": {
+      "type": "string"
+    },
+    "char_offset": {
+      "type": "number"
+    },
+    "line_number": {
+      "type": "number"
+    },
+    "occurrences": {
+      "type": "number",
+      "default": 1
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "new",
+        "reviewed",
+        "dismissed"
+      ],
+      "default": "new"
+    }
+  },
+  "required": [
+    "locator_id",
+    "source_file"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

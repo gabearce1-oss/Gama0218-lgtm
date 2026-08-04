@@ -1,0 +1,98 @@
+{
+  "name": "CookOutput",
+  "type": "object",
+  "properties": {
+    "cook_output_id": {
+      "type": "string"
+    },
+    "cook_packet_id": {
+      "type": "string"
+    },
+    "output_status": {
+      "type": "string",
+      "enum": [
+        "COOKED_PENDING_REVIEW",
+        "NEEDS_REVIEW",
+        "NEEDS_GABE_RULING",
+        "READY_FOR_GABE_REVIEW",
+        "REJECTED",
+        "ACCEPTED",
+        "ARCHIVED"
+      ],
+      "default": "COOKED_PENDING_REVIEW"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "findings": {
+      "type": "string"
+    },
+    "formulas_used": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "scores_generated": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "blocked_items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quarantine_recommendations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recommended_status": {
+      "type": "string",
+      "enum": [
+        "NEEDS_REVIEW",
+        "NEEDS_GABE_RULING",
+        "READY_FOR_GABE_REVIEW",
+        "REJECT"
+      ]
+    },
+    "writes_requested": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "canon_change_requested": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "cook_output_id"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "Sync blockers on report or update",
+  "description": "Pushes blockers to the Google Sheets BLOCKERS tab whenever a blocker is reported, updated, or removed. Unresolved blockers are written in red.",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "entity",
+      "events": [
+        "create",
+        "update",
+        "delete"
+      ],
+      "entity_name": "Blocker"
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "sync_blockers_on_report_or_update",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_function": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "syncBlockersToSheets",
+            "args": {}
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}

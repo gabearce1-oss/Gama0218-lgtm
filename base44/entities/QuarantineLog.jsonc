@@ -1,0 +1,130 @@
+{
+  "name": "QuarantineLog",
+  "type": "object",
+  "properties": {
+    "quarantine_id": {
+      "type": "string"
+    },
+    "item_name": {
+      "type": "string"
+    },
+    "item_type": {
+      "type": "string",
+      "enum": [
+        "Formula",
+        "Prompt",
+        "Claim",
+        "Citation",
+        "Dataset",
+        "Manuscript Passage",
+        "Scoring Rule",
+        "Automation Rule",
+        "External Source",
+        "Unknown"
+      ],
+      "default": "Formula"
+    },
+    "source_location": {
+      "type": "string"
+    },
+    "date_added": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "submitted_by": {
+      "type": "string"
+    },
+    "reason_for_quarantine": {
+      "type": "string"
+    },
+    "affected_systems": {
+      "type": "string"
+    },
+    "risk_level": {
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High",
+        "Critical"
+      ],
+      "default": "High"
+    },
+    "claim_status": {
+      "type": "string",
+      "enum": [
+        "Unreviewed",
+        "Unverified",
+        "Internally Plausible",
+        "Externally Supported",
+        "Verified",
+        "Rejected",
+        "Literary Only"
+      ],
+      "default": "Unreviewed"
+    },
+    "validation_required": {
+      "type": "string"
+    },
+    "review_owner": {
+      "type": "string"
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "Not Started",
+        "In Review",
+        "Needs Evidence",
+        "Needs Revision",
+        "Needs Reconciliation",
+        "Approved for Staging",
+        "Rejected",
+        "Archived"
+      ],
+      "default": "Not Started"
+    },
+    "release_decision": {
+      "type": "string",
+      "enum": [
+        "Remain Quarantined",
+        "Move to Staging",
+        "Move to Canonical",
+        "Reject",
+        "Archive Only"
+      ],
+      "default": "Remain Quarantined"
+    },
+    "release_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "quarantine_id",
+    "item_name"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "name": "ScanRun",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "string"
+    },
+    "source": {
+      "type": "string"
+    },
+    "files_seen": {
+      "type": "number",
+      "default": 0
+    },
+    "files_scanned": {
+      "type": "number",
+      "default": 0
+    },
+    "files_skipped": {
+      "type": "number",
+      "default": 0
+    },
+    "hits_created": {
+      "type": "number",
+      "default": 0
+    },
+    "words_scanned": {
+      "type": "number",
+      "default": 0
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "complete",
+        "error",
+        "no_files"
+      ],
+      "default": "running"
+    },
+    "error_message": {
+      "type": "string"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "finished_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "run_id"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

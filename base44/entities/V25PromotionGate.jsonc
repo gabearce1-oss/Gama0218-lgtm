@@ -1,0 +1,73 @@
+{
+  "name": "V25PromotionGate",
+  "type": "object",
+  "properties": {
+    "promotion_id": {
+      "type": "string"
+    },
+    "v25_item_type": {
+      "type": "string"
+    },
+    "v25_claim_or_formula": {
+      "type": "string"
+    },
+    "source_location": {
+      "type": "string"
+    },
+    "conflicts_with": {
+      "type": "string"
+    },
+    "evidence_status": {
+      "type": "string"
+    },
+    "recommended_action": {
+      "type": "string"
+    },
+    "gabe_decision": {
+      "type": "string"
+    },
+    "decision_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "promoted_status": {
+      "type": "string",
+      "enum": [
+        "NOT_REVIEWED",
+        "STAGING_ONLY",
+        "PROMOTED_FOR_CALCULATION",
+        "PROMOTED_FOR_CANON",
+        "REJECTED",
+        "QUARANTINED"
+      ],
+      "default": "NOT_REVIEWED"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "promotion_id"
+  ],
+  "rls": {
+    "create": null,
+    "read": null,
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "name": "Daily Google Sheets Workbook Sync",
+  "description": "Daily sync of Google Sheets workbook data (RF 1.5 scores, chapter metrics) from the master spreadsheet into Chapter entities",
+  "trigger": {
+    "condition": null,
+    "config": {
+      "trigger_type": "scheduled",
+      "events": [],
+      "schedule_mode": "interval",
+      "cron_expression": null,
+      "one_time_date": null,
+      "timezone": "UTC",
+      "interval_value": 1,
+      "interval_unit": "hours",
+      "interval_anchor": "2026-07-01T20:43:40.342000",
+      "ends_type": "never",
+      "ends_on_date": null,
+      "ends_after_count": null
+    }
+  },
+  "definition": {
+    "document": {
+      "dsl": "1.0.0",
+      "name": "daily_google_sheets_workbook_sync",
+      "version": "1.0",
+      "namespace": "base44"
+    },
+    "do": [
+      {
+        "run_function": {
+          "call": "invoke_backend_function",
+          "with": {
+            "function_name": "googledriveSyncWorkbooks",
+            "args": {}
+          },
+          "then": "end"
+        }
+      }
+    ]
+  }
+}
